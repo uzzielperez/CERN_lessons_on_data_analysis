@@ -869,6 +869,8 @@ layout: fact
 THE END!  
 This is just a simulation.
 
+![image](./resources/bash/TerminalKungfu.png)
+
 ---
 layout: fact 
 ---

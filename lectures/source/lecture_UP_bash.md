@@ -39,463 +39,1204 @@ backgroundSize: contain
 ```bash
 wsl --install
 ``` 
+
+---
+layout: image-right
+image: ./resources/bash/AFSStorage.png
+backgroundSize: contain
 ---
 
-## What is Lxplus?
+# What is Lxplus?
 
 - ### _*lxplus*_ is CERN's interactive linux service for all users 
 - It is provided by the IT department and you need to request the activation of "AFS Workspaces" and of 
-lxplus and linux for your account through the [CERN Resource Portal](https://resources.web.cern.ch/resources/Manage/ListServices.aspx)
+lxplus and linux for your account through the [CERN Resource Portal](https://resources.web.cern.:x
+ch/resources/Manage/ListServices.aspx)
 - Also extremely helpful to get some `eos/CERNBox` storage as well 
-- List Services &rarr; AFS Workspaces &rarr; Settings &rarr;
+- List Services &rarr; AFS Workspaces &rarr; Settings 
 
-Can you do the following?
 
-```bash
-ssh -Y USERNAME.lxplus.cern.ch
-lhcb-proxy-init
-```
-
----
-# Tracking Changes (differences)  
-
-- ### Rather than saving multiple copies of the same file, we can track changes.
-- ###  Word processors and other software have some change-tracking functionality but it is limited (no synchronous editing, no change history, etc.).
-- ### `git` is an open-source version control system that is used to track changes in files.
-
-![](./resources/git/play-changes.svg)
-
----
-layout: image-right
-image: ./resources/git/versions.svg
-backgroundSize: contain
----
-
-# Different Versions 
-
-- ### An eddit to a file might overwrite some of the content in the previous version.
-- ### This *divergences* may arrise while working alone, but they are really common when multiple people are working on the same file.
-
----
-layout: image-right
-image: ./resources/git/merge.svg
-backgroundSize: contain
----
-
-# Merging 
-
-- ### `git` has great functionality for merging different versions of the same file.
-- ### If the previous content is not overwritten, or deleted, merge just combines the changes into one file.
-- ### If changes over-write each other a so-called **merge conflict** arises.
 
 ---
 layout: two-cols
 ---
 
-# Using `git` for the first time 
+#  Checking the manual 
 
-- ### The user name and email address need to configured.
+Open the terminal and let's get right on to it! 
 
-```bash
-git config --global user.name "Mindaugas Sarpis"
-git config --global user.email "mindaugas.sarpis@cern.ch"
-```
-
-- ### Check the configuration with:
+First command to learn: 
 
 ```bash
-git config --list
+man bash
 ```
 
-- ### Edit the configuration with:
-  
+This shows the documentation on Bash including all the options that can be used with this command.
+## SSH: Connecting to a remote computer 
+
 ```bash
-git config --global --edit
+man ssh
 ```
 
-- ### Open configuration help:
-   
-```bash
-git config --h
-git config --help
-```
+**SSH** or Secure Shell is a protocol used to securely connect to a remote computer or server over an unsecured network.  
+
 
 ::right:: 
 
 ```bash {*}{maxHeight:'450px', maxWidth:'50px'}
-usage: git config [<options>]
+NAME
+       bash - GNU Bourne-Again SHell
 
-Config file location
-    --global              use global config file
-    --system              use system config file
-    --local               use repository config file
-    --worktree            use per-worktree config file
-    -f, --file < file >     use given config file
-    --blob < blob-id >      read config from given blob object
+SYNOPSIS
+       bash [options] [command_string | file]
 
-Action
-    --get                 get value: name [value-pattern]
-    --get-all             get all values: key [value-pattern]
-    --get-regexp          get values for regexp: name-regex [value-pattern]
-    --get-urlmatch        get value specific for the URL: section[.var] URL
-    --replace-all         replace all matching variables: name value [value-pattern]
-    --add                 add a new variable: name value
-    --unset               remove a variable: name [value-pattern]
-    --unset-all           remove all matches: name [value-pattern]
-    --rename-section      rename section: old-name new-name
-    --remove-section      remove a section: name
-    -l, --list            list all
-    --fixed-value         use string equality when comparing values to 'value-pattern'
-    -e, --edit            open an editor
-    --get-color           find the color configured: slot [default]
-    --get-colorbool       find the color setting: slot [stdout-is-tty]
+COPYRIGHT
+       Bash is Copyright (C) 1989-2020 by the Free Software Foundation, Inc.
 
-Type
-    -t, --type <type>     value is given this type
-    --bool                value is "true" or "false"
-    --int                 value is decimal number
-    --bool-or-int         value is --bool or --int
-    --bool-or-str         value is --bool or string
-    --path                value is a path (file or directory name)
-    --expiry-date         value is an expiry date
+DESCRIPTION
+       Bash is an sh-compatible command language interpreter that executes commands read from the standard input or from a file.  Bash also incorporates use‐
+       ful features from the Korn and C shells (ksh and csh).
 
-Other
-    -z, --null            terminate values with NUL byte
-    --name-only           show variable names only
-    --includes            respect include directives on lookup
-    --show-origin         show origin of config (file, standard input, blob, command line)
-    --show-scope          show scope of config (worktree, local, global, system, command)
-    --default < value >     with --get, use default value when missing entry
+       Bash is intended to be a conformant implementation of the Shell and Utilities portion of the IEEE POSIX specification (IEEE  Standard  1003.1).   Bash
+       can be configured to be POSIX-conformant by default.
+
+OPTIONS
+       All  of  the  single-character  shell  options documented in the description of the set builtin command, including -o, can be used as options when the
+       shell is invoked.  In addition, bash interprets the following options when it is invoked:
+
+       -c        If the -c option is present, then commands are read from the first non-option argument command_string.  If there  are  arguments  after  the
+                 command_string,  the first argument is assigned to $0 and any remaining arguments are assigned to the positional parameters.  The assignment
+                 to $0 sets the name of the shell, which is used in warning and error messages.
+       -i        If the -i option is present, the shell is interactive.
+       -l        Make bash act as if it had been invoked as a login shell (see INVOCATION below).
+
+
 ```
+
+---
 
 ---
 layout: two-cols
 ---
 
-# Creating a new repository
+#  SSH to LXPLUS
 
-- ### A repository is initialized with the following command:
 
 ```bash
-git init
+ssh -XY USERNAME@lxplus.cern.ch
 ```
 
-- ### This command creates a new repository in the current directory. 
+You can read from 
+```bash 
+man ssh 
+```
 
-- ### The repository is a hidden directory called `.git` that contains all the information changes tracked by `git`.
+what the flags after ssh are for. 
 
-- ### You can check the status of the repository with:
+```
+
+```
+
+- ## Accessing the Grid 
+
+To access the grid, we need to initialize a valid **Grid Proxy Certificate** which is essential for accessing various LHCb and CERN computing resources (data storages, job submission and file transfer). 
 
 ```bash
-git status
+lhcb-proxy-init 
 ```
 
-::right::
-
-![](./resources/git/git-staging-area.svg)
-
-- ### The repository is empty at this point and the output will be:
-    
-```bash
-On branch main
-
-No commits yet
-
-nothing to commit (create/copy files and use "git add" to track)
-```
-
----
-layout: two-cols
----
-
-# Staging Area
-
-- ### `git` has a staging area where files are placed to track the changes made to them.  
-
-- ###  To move a file to the staging area use: 
-  
-  ```bash
-  git add <file>
-  ```
-
-- ### To move all files to the staging area use: 
-  
-  ```bash
-  git add --all
-  ```
-
-- ### To unstage a file use: 
-    
-    ```bash
-    git restore --staged <file>
-    ```
- 
-- ### Changes to files can be viewed with:
-  ```bash
-  git diff
-  ```
-
-::right::
-
-![](./resources/git/git-staging-area.svg)
-
-- ### When staged files are present, the output of `git status` will be:
-
-```bash
-On branch main
-Your branch is up to date with 'origin/main'.
-
-Changes to be committed:
-  (use "git restore --staged <file>..." to unstage)
-        modified:   < file >
-```
-
----
-layout: two-cols
----
-
-# Committing Changes
-
-- ### Files are committed to the repository from the staging area with:
-
-  ```bash
-  git commit -m "A message describing the changes"
-  ```
-- ### Commit is a snapshot of the repository at a given time.
-
-- ### Only changes to files are tracked, not the directories themselves. 
-- ### It's best to keep the commits small and focused on a single change.
-- ### The commit message should be descriptive and concise.
-- ### The commit message should be in the present tense.
-  
-
-::right::
-![](./resources/git/git-committing.svg)
-
----
-layout: two-cols
----
-
-# Restoring Changes
-
-- ### Changes to files can be restored to the last commit with:
-
-  ```bash
-  git restore < file >
-  ```
-
-- ### Changes to files can be restored to the last commit and the staging area with:
-
-  ```bash
-  git restore --staged < file >
-  ```
-
-- ### Changes to files from previous commits can be restored using the *hash* of the commit:
-
-  ```bash
-  git restore --source=<hash> < file >
-  ```
-::right::
-
-![](./resources/git/git-restore.svg)
-
-- ### A new commit reverting the changes can be made with:
-  ```bash
-  git revert < hash >
-  ```
-
-- ### The entire repository can be restored to the last commit with deleting the changes:
-
-  ```bash
-  git reset --hard < hash >
-  ```
-
----
-layout: image
-image: ./resources/git/git_staging.svg
-backgroundSize: contain
----
-
----
-layout: two-cols
----
-
-# Ignoring Files and Directories 
-
-- ### There might be files that you don't want to track with `git`.
-
-  - #### Temporary files
-  - #### Output files 
-  - #### Files with sensitive information
-  - #### Large files
-
-- ### These files can be ignored by creating a `.gitignore` file in the repository.
+This command is a wrapper around the standard `voms-proxy-init`. You should see a similar output as on the right.
 
 ::right:: 
 
-```bash {*}{maxHeight:'350px'}
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+```bash {*}{maxHeight:'450px', maxWidth:'50px'}
+ciperez:~$ lhcb-proxy-init
+Generating proxy...
+Enter Certificate password: **********
+Added VOMS attribute /lhcb/Role=user
+Uploading proxy..
+Proxy generated:
+subject      : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=ciperez/CN=773459/CN=Cilicia Uzziel Perez/CN=2572271230/CN=3271731157
+issuer       : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=ciperez/CN=773459/CN=Cilicia Uzziel Perez/CN=2572271230
+identity     : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=ciperez/CN=773459/CN=Cilicia Uzziel Perez
+timeleft     : 23:53:59
+DIRAC group  : lhcb_user
+path         : /tmp/x509up_u81686
+username     : ciperez
+properties   : NormalUser, PrivateLimitedDelegation
+VOMS         : True
+VOMS fqan    : ['/lhcb/Role=user']
 
-# C extensions
-*.so
+Proxies uploaded:
+ DN                                                                                    | Until (GMT)
+ /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=ciperez/CN=773459/CN=Cilicia Uzziel Perez | 2025/10/15 12:12
 
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
-cover/
-
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-.pybuilder/
-target/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# IPython
-profile_default/
-ipython_config.py
-
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
-__pypackages__/
-
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
 ```
 
 ---
 layout: image-right
-image: ./resources/git/git-freshly-made-github-repo.svg
+image: ./resources/bash/loginlxplus.png
 backgroundSize: contain
 ---
 
-# Git Remotes
+# Quick Checks
 
-- ### One of the most powerful features of `git` is the ability to work with remote repositories.
-- ### Remote repositories are copies of the repository that are stored on a server.
-- ### Using one of the remote providers (GitHub, GitLab, Bitbucket, etc.) you can store your repository in the cloud.
-- ### This enables collaboration with other people and provides a backup of your work.
+To make sure we're all on the same page open your terminal and do the following: 
+
+Now let's log-in to lxplus
+```bash
+ssh -XY USERNAME.lxplus.cern.ch
+lhcb-proxy-init
+```
+
+If you've got things set-up before the school, you should see: 
+
+```bash {*}{maxHeight:'450px', maxWidth:'50px'}
+Generating proxy...
+Enter Certificate password: **********
+Added VOMS attribute /lhcb/Role=user
+Uploading proxy..
+Proxy generated:
+subject      : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=ciperez/CN=773459/CN=Cilicia Uzziel Perez/CN=2572271230/CN=3271731157
+issuer       : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=ciperez/CN=773459/CN=Cilicia Uzziel Perez/CN=2572271230
+identity     : /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=ciperez/CN=773459/CN=Cilicia Uzziel Perez
+timeleft     : 23:53:59
+DIRAC group  : lhcb_user
+path         : /tmp/x509up_u81686
+username     : ciperez
+properties   : NormalUser, PrivateLimitedDelegation
+VOMS         : True
+VOMS fqan    : ['/lhcb/Role=user']
+
+Proxies uploaded:
+ DN                                                                                    | Until (GMT)
+ /DC=ch/DC=cern/OU=Organic Units/OU=Users/CN=ciperez/CN=773459/CN=Cilicia Uzziel Perez | 2025/10/15 12:12
+```
 
 ---
-layout: image-right
-image: ./resources/git/git-freshly-made-github-repo.svg
-backgroundSize: contain
+layout: two-cols
 ---
 
-# Git Remotes
+# Bash Commands 
 
-- ### The remote is created via the remote provider (GitHub, GitLab, Bitbucket, etc.).
-- ### A remote URL needs to be added to the local repository with: 
+- ### Show who runs the script
 
 ```bash
-git remote add origin git@github.com:mygithub/myremote.git
+whoami 
+```
+vs
+```bash
+$USER.
 ```
 
-- ### To check which remotes are added: 
+- ### Enhance your Terminal Productivity! 
+See keyboard shortcuts on the right and for a more exhaustive list [Terminal](https://keycombiner.com/collections/terminal/).
+
+<!-- In the next few slides:
+
+- ### File System Navigation
+- ### Modifying Files & Directories
+- ### Piping
+- ### Regular Expressions -->
+
+
+::right:: 
+
+```bash {*}{maxHeight:'450px', maxWidth:'50px'}
+- ### Keyboard Commands and Navigation
+
+- `Up Arrow`: Will show your last command
+- `Down Arrow`: Will show your next command
+- `Tab`: Will auto-complete your command
+- `Ctrl + L` or `clear`: Will clear the screen
+- `Ctrl + C`: Will cancel a command
+- `Ctrl + R`: Will search for a command
+- `Ctrl + D`: Will exit the terminal
+
+- ### Cursor 
+- `Ctrl + A`: Go to the beginning of the command line 
+- `Ctrl + E`: Go to the end of the command line 
+- `Ctrl + B`: Move back one character 
+- `Ctrl + F`: Move forward one character 
+- `alt + right`: Move cursor forward one word 
+- `alt + left`: Move cursor back one word
+
+- ### History 
+- `history` : to print out entire history
+- `Ctrl + r`: search command history
+
+```
+
+
+
+---
+layout: full
+---
+
+#  File System navigation 
+
+Commands to navigate the file system. If you are using `lxplus`, you are most-likely 
+using the **AFS** or the _Andrew File System_ which is a distributed file system where multiple computers are allowed to share files and data efficiently.
+
+```bash {*}{maxHeight:'450px', maxWidth:'70px'}
+
+| Command                             | Description                                                                       |
+| ----------------------------------- | --------------------------------------------------------------------------------- |
+| pwd                                 | Lists the path to the working directory                                           |
+| ls                                  | List directory contents                                                           |
+| ls -a                               | List contents including hidden files (Files that begin with a dot)                |
+| ls -l                               | List contents with more info including permissions (long listing)                 |
+| ls -r                               | List contents reverse order                                                       |
+| cd                                  | Change directory to home                                                          |
+| cd [dirname]                        | Change directory to specific directory                                            |
+| cd ~                                | Change to home directory                                                          |
+| cd ..                               | Change to parent directory                                                        |
+| cd -                                | Change to previous directory (which could be different than the parent of course) |
+| find [dirtosearch] -name [filename] | Find location of a program                                                        |
+
+```
+One can also group flags together like `ls -la`. [Credits to _bradtraversy_ for this slide.](https://gist.github.com/bradtraversy/cc180de0edee05075a6139e42d5f28ce) 
+
+<!-- 
+::right:: -->
+
+<!-- ![](./resources/git/git-staging-area.svg) -->
+
+---
+layout: center
+---
+
+#  Modifying files and directories 
+
+Below are a list of commands to modify files and directories.
+
+```bash {*}{maxHeight:'450px', maxWidth:'70px'}
+
+| Command                     | Description                                         | Examples                   |
+| --------------------------- | --------------------------------------------------- | -------------------------- |
+| mkdir [dirname]             | Make directory                                      | mkdir starterkit24         |
+| touch [filename]            | Create file                                         | touch scratch.py           |
+| rm [filename]               | Remove file                                         | rm scratch.py              |
+| rm -i [filename]            | Remove directory, but ask before                    | rm -i scratch.py           |
+| rm -r [dirname]             | Remove directory                                    | rm -r startkerkit24        |
+| rm -rf [dirname]            | Remove directory with contents                      | .....                      |
+| rm ./\*                     | Remove everything in the current folder             | 
+| cp [filename] [dirname]     | Copy file                                           | 
+| mv [filename] [dirname]     | Move file                                           |
+| mv [dirname] [dirname]      | Move directory                                      |
+| mv [filename] [filename]    | Rename file or folder                               |
+| mv [filename] [filename] -v | Rename Verbose - print source/destination directory |
+```
+We can also do multiple commands at once with the `&&` operator. [Credits to _bradtraversy_ for this slide.](https://gist.github.com/bradtraversy/cc180de0edee05075a6139e42d5f28ce).
+
+---
+layout: two-cols
+---
+
+# Display and Redirection 
+
+
+<!-- - ### Redirecting 
+``` bash
+echo "First line" > file.txt       # Creates/overwrites file
+echo "Second line" >> file.txt     # Appends to file
+``` -->
+
+
+- ###  To display messages 
   
+  ```bash
+  echo "Hello, My name's Forrest."
+  ```
+
+- ### To create a file with Echo
+  
+  ```bash
+  echo "Hello, My name's Forrest." > helloworld.txt
+  ```
+
+- ### To append to a file
+    
+    ```bash
+    echo "Forrest Gump." >> helloworld.txt
+    ```
+- ### To display the content of the file
+  ``` bash 
+  cat helloworld
+  ```
+In general the right angle bracket tells the system to output results into a target. 
+
+
+::right::
+
 ```bash
-  git remote -v
+echo "  /\___/\ "
+echo " (  o o  )"
+echo " (  =^=  )"
+echo "  --m-m-- "
+```
+
+To save the cat into a file:
+
+```bash
+echo -e " /\\___/\\\n(  o o  )\n(  =^=  )\n (--m-m--)" > cat.txt
+```
+
+Here's a dog:
+```
+echo -e "  ___________________
+< Hello, nice to meet you! >
+  -------------------
+     \\   ^__^
+      \\  (oo)\\_______
+         (__)\\       )\\/\\
+             ||----w |
+             ||     ||"
 ```
 
 ---
-layout: image-right
-image: ./resources/git/github-repo-after-first-push.svg
+layout: two-cols
+---
+
+# Piping and Cat 
+
+Like the Force, Piping flows through the terminal, connecting commands together. It's a pathway to many abilities some consider to be... unnatural. Let's use R2-D2 to help us organize some Imperial documents.
+
+First, let's create 10 Death Star plans:
+  ```bash
+  touch deathstar-plans-{001..010}.txt
+
+  .---.
+      /    |\          
+      |    | \         .-'''-.
+      |    |  \       /   <0> \ 
+      |    |   \     /  .---.  \    BEEPS: "Now piping data..."
+      |    |    \   /  /     \  \
+                 \ /  /       \  \
+                  '  /         \  \
+                  \  |         |  |
+                   | |         |  |
+                   |_|         |__|
+  ```
+
+  
+
+::right::
+Now, let's use R2-D2 to pipe these secret plans into a secure Rebel database file named 
+```bash 
+find . -name "deathstar-plans-*" > rebel_intel.txt
+cat rebel_intel.txt
+
+# Search plans for weakness references
+cat rebel_intel.txt | grep "exhaust-port"
+
+# Count total number of stolen plans
+ls deathstar-plans* | wc -l
+
+# Sort plans by security level and send to R2
+cat rebel_intel.txt | sort | R2D2-encrypt
+```
+<!-- # Command Reference Table -->
+```
+
+| Command | Description                                    | 
+| --------| -----------------------------------------------|
+| cat     | Displays file content, concatenate files       |
+| grep    | Search for patterns, filter matching lines     |
+| wc      | Count words (w)/lines (l)/chars (c)            | 
+| sort    | Sort lines of text (-r, reverse, -n, numeric)  |
+```
+
+---
+layout: center
+---
+
+#  More commands 
+
+Below are a list of commands to modify files and directories.
+
+```bash {*}{maxHeight:'450px', maxWidth:'70px'}
+
+| Command                            | Description                           | Examples                              |
+| -----------------------------------| --------------------------------------| ------------------------------------- |
+| grep [pattern][file]               | Looks for a pattern in file           | grep "exhaust-port" rebel_intel.txt   |
+| find [directory] -n[name]          | Finds a file in directory             | find . -n rebel_intel.txt             |
+| sed "s/[find]/[replace]/g" [file]  | Find and replace a pattern in a text  | sed "s/Luke/Leia/g" rebel_intel.txt   |
+| ln -s [filename] [symlinkname]     | Create a symlink                      | ln -s [rebel_intel.txt][rebel.txt]    |
+| history                            |
+
+```
+ * `grep` is short for _global regular expression print_. It is a useful command to search for matching patterns in a file.
+ * `sed` stands for _stream editor_ and it can be used to edit text files. It is commonly used to replace occurences of words in a file.  
+ * Creating a symlink is neat way to create shortcut to the original file without having to copy the file.
+ * To run the 100th command in history, one can do `!100`
+
+---
+layout: center
+---
+
+# Jedi Terminal Arts 
+
+- ## Loops Clone Army
+
+```bash
+echo "Creating Clone Army..." > clone_trooper.txt
+for i in {1..100}; do echo "CT-$i reporting for duty" >> clone_trooper.txt; done
+```
+
+
+- ## The Force Redirect (Advanced Output)
+```bash
+echo "These aren't the droids you're looking for" >> kenobi_mind_tricks.txt
+```
+
+
+- ## Lightsaber Grep (Search)
+```bash
+grep -r "rebellion" ./* | echo "⚔️  Lightsaber found these matches:"
+```
+
+---
+layout: default
+---
+
+# Jedi Mind Tricks
+
+```bash
+ps aux | grep "imperial-spy"    # Find Imperial processes
+kill -9 $imperial_pid           # Use Force choke
+
+# Vader's File Permissions
+chmod 777 death_star_plans.txt  # Grant all access
+chown luke skywalker.txt        # Transfer ownership
+
+# Millennium Falcon Data Transfer
+# Open a new terminal and secure copy death_star_plans.txt to your Desktop
+
+cd ~/Desktop
+scp . jediusername@lxplus.cern.ch<afspath/to/>/death_star_plans.txt 
+rsync -avz rebel_base/ backup_base/    # Always have a backup plan
+```
+```bash
+.=.
+      '==c|
+      [)-+|
+      /'/\|
+     /  /\|
+    /  /  |
+   /  /  /|
+  /  /  / |
+ /__/__/  |
+<._._._,_/>  BB-8: "Beep boop - executing commands!"
+
+```
+
+
+---
+layout: default
+---
+
+# Head and Tail 
+
+
+
+```bash
+  head [filename]
+```
+
+You can also specify the number of lines to output:
+
+```bash
+  head -n 5 [filename]
+```
+
+The `tail` command is used to output the last part of files. By default, it outputs the last 10 lines of each file. You can also specify the number of lines to output.
+
+```bash
+  tail [filename]
+```
+
+You can also specify the number of lines to output:
+
+```bash
+  tail -n 5 [filename]
+```
+
+Let's make 100 Clone Troopers and print out the first 3 lines and the last 5 lines in the list.
+```bash
+echo "Creating Clone Army..." > clone_trooper.txt
+for i in {1..100}; do echo "CT-$i reporting for duty" >> clone_trooper.txt; done
+head -n 3 clone_trooper.txt  && tail -n 5 clone_trooper.txt
+```
+
+
+
+
+
+---
+layout: default
 backgroundSize: contain
 ---
+# Other Comands 
 
-# Push / Pull Operations
 
-- ### Changes to the local repository can be pushed to the remote repository with:
 
-```bash
-git push origin main
-```
-
-- ### Changes to the remote repository can be pulled to the local repository with:
-
-```bash
-git pull
-```
-
----
-layout: image-right
-image: ./resources/git/github-collaboration.svg
-backgroundSize: contain
----
-
-# Cloning Repositories
-
-- ### A repository can be cloned from a remote repository with:
-
-```bash
-git clone < URL >
+```bash 
+| Command     | Description                                                     |           /      \__
+| ----------- | --------------------------------------------------------------- |          /   []     |
+| ps          | a.k.a. process status displays all processes                    |          |          |
+| ps aux      | display all processes in the system, of aux flags.              |          |    ______|
+| chmod       | change file modes                                               |          |    ______|
+| chmod u+x   | give yourself (owner only) permission to execute a file you own |          /    |____  
+| chmod +x    | Adds permission to execute a file = `chmod a+x`                 |         /     ____|
+| chown       | change file onwer or group                                      | |\     /     |_
+| top         | display sorted information about processes                      | | \   /        /\
+| kill <pid>  | terminate or kill a signal process                              | |  \_/        |  []
+| kill -9     | non-ignorable kill!                                             | |             |
+| lsof +D     | list open files. Useful when prematurely killing a process      |  \           /
+| tar         | manipulate tape archives                                        |   \         / 
+| zip         | package and compresss archive files                             |    \  ___ |
+                                                                                      | |  \|
+                                                                                      |/    |
+                                                                                      |_    |_
+                                                                                      [_]   [_]
 ```
 
 ---
+layout: fact
+---
 
-# Branches 
+Bash scripting is a powerful way to automate tasks on Linux and can be used in endless ways and boosts productivity and having basic knowledge of it is important if you’re planning on becoming an ethical hacker or system administrator or simply want to automate tedious boring tasks and we’ll hopefully explore more in later blogs and build interesting tools with it - **moo**, some guy on [medium](https://medium.com/geekculture/bash-scripting-for-dummies-5d855cbada66)
 
-- ### `git` has a powerful branching system that allows for multiple versions of the repository to be worked on simultaneously.
-- ### The default branch is called `main`.
-- ### A new branch can be created with:
 
-```bash
-git branch < branch-name >
+---
+layout: two-cols
+---
+# Bash Scripting Crash Course
+
+Inspired by the [Missing Shell Scripting Crash Course](https://dev.to/godcrampy/the-missing-shell-scripting-crash-course-37mk)
+
+
+- ## Variable 
+Assigning value to a variable needs `$`, otherwise bash will treat name as a string literal and it will output `Hello name` instead.
+```bash 
+#!/bin/bash
+name ="Luke Skywalker"
+echo "Hello, $name"
 ```
 
-- ### The branch can be switched with:
+To run,  
+```bash
+$user chmod
+$user ./script.sh
+```
+::right::
+
+- ## User input
 
 ```bash
-git checkout < branch-name >
+read -p "What is you name: " name
+echo "Hello $name"
+
+read -p "Enter an action: " verb
+echo "You are ${verb}ing"
 ```
+- ## Arguments
+
+`$1, $2..` store the arguments passed to the script... 
+
+```bash
+echo $0
+echo $1
+echo $2
+echo "${@}" # Access all the arguments [More on this later]
+```
+
+So if you do `./script.sh condition1 condition2`, what happens? It just echos the strings passed on to the script.
+
+---
+layout: two-cols
+---
+# Bash Scripting Crash Course
+
+Inspired by the [Missing Shell Scripting Crash Course](https://dev.to/godcrampy/the-missing-shell-scripting-crash-course-37mk)
+
+
+- ## Logical Comparisons 
+
+* [[]] enables to use operators. 
+*  Comparisons: `=, !=, >, <, ≤, ≥`
+* Leave some space on both ends of brackets.. :) 
+
+```bash 
+if [[ "$name" == "adam driver" ]]
+then
+   echo "hi adam we missed you"
+else
+   echo "welcome $name"
+fi
+```
+
+::right::
+
+- ## Test commands for some complex operations
+
+```bash
+[[ -e "$file" ]] # True if file exists
+[[ -d "$file" ]] # True if file exists and is a directory
+[[ -f "$file" ]] # True if file exists and is a regular file
+[[ -z "$str" ]]  # True if string is of length zero
+[[ -n "$str" ]]  # True is string is not of length zero
+
+# Compare Strings
+[[ "$str1" == "$str2" ]]
+[[ "$str1" != "$str2" ]]
+
+# Integer Comparisions
+[[ "$int1" -eq "$int2" ]] # $int1 == $int2
+[[ "$int1" -ne "$int2" ]] # $int1 != $int2
+[[ "$int1" -gt "$int2" ]] # $int1 > $int2
+[[ "$int1" -lt "$int2" ]] # $int1 < $int2
+[[ "$int1" -ge "$int2" ]] # $int1 >= $int2
+[[ "$int1" -le "$int2" ]] # $int1 <= $int2
+
+# And or 
+[[ ... ]] && [[ ... ]] # And
+[[ ... ]] || [[ ... ]] # Or
+```
+
+
+---
+layout: two-cols
+---
+# Bash Scripting Crash Course
+
+Inspired by the [Missing Shell Scripting Crash Course](https://dev.to/godcrampy/the-missing-shell-scripting-crash-course-37mk)
+
+
+- ## Arrays and Functions
+
+```bash 
+arr=(a b c d)
+```
+
+To read: 
+
+```bash
+echo "${arr[1]}"     # Single element
+echo "${arr[-1]}"    # Last element
+echo "${arr[@]:1}"   # Elements from 1
+echo "${arr[@]:1:3}" # Elements from 1 to 3
+```
+
+To insert: 
+```bash 
+arr[5]=e                            # direct address and insert/update
+arr=(${arr[@]:0:1} new ${arr[@]:1}) # Adding 'new' to array
+```
+
+To delete:
+```bash
+arr=(a b c d)
+unset arr[1]
+echo << "${arr[1]}" # Outputs nothing
+```
+
+::right::
+
+- ## Deleting needs re-indexing
+
+```bash
+arr=(a b c d)
+unset arr[1]
+arr=("${arr[@]}")
+echo << "${arr[1]}" # c
+```
+- ## Functions
+
+```bash
+greet() {
+  echo "Hello, $1"
+}
+
+greet Bash # Hello, Bash
+```
+
+---
+layout: two-cols
+---
+
+# Bash Scripting 
+
+Store this cat into a `txt` file.
+```bash
+ /\_/\
+( o o )
+ > ^ <
+```
+
+::right::
+
+Can you use your Jedi Tricks to make this cat sleep?
+Use the `sed` command and store it into another `txt` file.
+
+```bash 
+
+
+ /\_/\
+( X X )
+ > ^ <
+
+```
+
+
+
+---
+layout: two-cols
+---
+
+# Cat Exercise
+
+Store this cat into a `txt` file.
+```bash
+ /\_/\
+( o o )
+ > ^ <
+```
+
+Open a file `<editor> cat_draw.sh`. When creating a bash script, start with a shebang.
+
+```bash
+#!/bin/bash
+
+# File to store the cat
+cat_file="cat.txt"
+
+# Draw a cat with eyes open and write to the file
+cat_open="
+ /\\_/\\
+( o o )
+ > ^ <
+"
+echo "$cat_open" > $cat_file
+echo "Cat with eyes open has been written to $cat_file."
+```
+
+::right::
+Run the script. 
+
+```bash
+chmod +x cat_draw.sh
+./cat_draw.sh
+```
+
+Check the contents of the `cat_file` with `cat cat_file`. 
+
+Can you use your Jedi Tricks to make this cat sleep?
+Use the `sed` command and store it into another `txt` file.
+
+```bash 
+# Use sed to replace open eyes (o) with closed eyes (X)
+sed "s/o/X/g" $cat_file > sleeping_cat.txt
+echo "Cat with eyes closed has been written to sleeping_cat.txt."
+cat sleeping_cat.txt
+
+
+ /\_/\
+( X X )
+ > ^ <
+```
+
+---
+layout: two-cols
+---
+
+# Shell Scripts 
+
+Write a new script called `my_script.sh` with your favorite editor.
+
+* _Loops_ and _if statements_ need a ";"
+
+```bash
+j = 20 
+for i in {0..10};
+  do
+    echo $i
+    (( j+= 1))
+  done 
+
+if [-f $HOME/.bashrc ];
+  then
+    echo Have .bashrc
+fi 
+```
+
+* Variables 
+Assigning value to a variable needs `$`
+
+```bash
+a = $((j+2))
+echo $a, $j
+```
+
+::right::
+
+We can add some safety options  at the top of the script. 
+```bash 
+
+
+#!/usr/bin/env bash
+
+# my_script.sh
+
+# Safety options
+# -u :Undefined variables are treated as errors 
+# script will stop when encountered
+# -e: if any commands in the script fail
+# the script immediately fails
+# -o: pipefail prevents the script from running in pipes
+
+set -eux -o pipefail 
+shopt -s expand_aliases
+ 
+j = 20 
+for i in {0..10};
+  do
+    echo $i
+    (( j+= 1))
+  done 
+....
+
+```
+
+---
+layout: two-cols
+---
+
+# Shell Scripts 
+
+Write a new script called `my_script.sh` with your favorite editor.
+
+* _Loops_ and _if statements_ need a ";"
+
+```bash
+j = 20 
+for i in {0..10};
+  do
+    echo $i
+    (( j+= 1))
+  done 
+
+if [-f $HOME/.bashrc ];
+  then
+    echo Have .bashrc
+fi 
+```
+
+* Variables 
+Assigning value to a variable needs `$`
+
+```bash
+a = $((j+2))
+echo $a, $j
+```
+
+::right::
+
+We can add some safety options  at the top of the script. 
+```bash 
+
+
+#!/usr/bin/env bash
+
+# my_script.sh
+
+# Safety options
+# -u :Undefined variables are treated as errors 
+# script will stop when encountered
+# -e: if any commands in the script fail
+# the script immediately fails
+# -o: pipefail prevents the script from running in pipes
+
+set -eux -o pipefail 
+shopt -s expand_aliases
+ 
+j = 20 
+for i in {0..10};
+  do
+    echo $i
+    (( j+= 1))
+  done 
+....
+
+```
+
+
+---
+layout: default
+---
+
+# Minimal Safe Bash Script Template
+A tutorial I wish I had when I was younger is from [Bash Script Template](https://betterdev.blog/minimal-safe-bash-script-template/)
+
+```bash {*}{maxHeight:'450px', maxWidth:'50px'}
+#!/usr/bin/env bash
+
+## FAIL FAST
+# The set command changes the script execution options
+set -Eeuo pipefail
+trap cleanup SIGINT SIGTERM ERR EXIT
+
+script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
+
+usage() {
+  cat << EOF # remove the space between << and EOF, this is due to web plugin issue
+Usage: $(basename "${BASH_SOURCE[0]}") [-h] [-v] [-f] -p param_value arg1 [arg2...]
+
+Script description here.
+
+Available options:
+
+-h, --help      Print this help and exit
+-v, --verbose   Print script debug info
+-f, --flag      Some flag description
+-p, --param     Some param description
+EOF
+  exit
+}
+
+cleanup() {
+  trap - SIGINT SIGTERM ERR EXIT
+  # script cleanup here
+}
+
+setup_colors() {
+  if [[ -t 2 ]] && [[ -z "${NO_COLOR-}" ]] && [[ "${TERM-}" != "dumb" ]]; then
+    NOFORMAT='\033[0m' RED='\033[0;31m' GREEN='\033[0;32m' ORANGE='\033[0;33m' BLUE='\033[0;34m' PURPLE='\033[0;35m' CYAN='\033[0;36m' YELLOW='\033[1;33m'
+  else
+    NOFORMAT='' RED='' GREEN='' ORANGE='' BLUE='' PURPLE='' CYAN='' YELLOW=''
+  fi
+}
+
+msg() {
+  echo >&2 -e "${1-}"
+}
+
+die() {
+  local msg=$1
+  local code=${2-1} # default exit status 1
+  msg "$msg"
+  exit "$code"
+}
+
+parse_params() {
+  # default values of variables set from params
+  flag=0
+  param=''
+
+  while :; do
+    case "${1-}" in
+    -h | --help) usage ;;
+    -v | --verbose) set -x ;;
+    --no-color) NO_COLOR=1 ;;
+    -f | --flag) flag=1 ;; # example flag
+    -p | --param) # example named parameter
+      param="${2-}"
+      shift
+      ;;
+    -?*) die "Unknown option: $1" ;;
+    *) break ;;
+    esac
+    shift
+  done
+
+  args=("$@")
+
+  # check required params and arguments
+  [[ -z "${param-}" ]] && die "Missing required parameter: param"
+  [[ ${#args[@]} -eq 0 ]] && die "Missing script arguments"
+
+  return 0
+}
+
+parse_params "$@"
+setup_colors
+
+# script logic here
+
+msg "${RED}Read parameters:${NOFORMAT}"
+msg "- flag: ${flag}"
+msg "- param: ${param}"
+msg "- arguments: ${args[*]-}"
+
+```
+
+---
+layout: default
+---
+
+# Minimal Safe Bash Script Template Walkthrough
+
+* FAIL FAST
+
+```bash
+#!/usr/bin/env bash
+cp important_file ./backups/
+rm important_file
+```
+Suppose the backups directory does not exist. If there is no safety option `set -Eeuo pipefail`, bash jumps into the next command and deletes the important file before you can react.
+
+* Get the Location
+```bash
+script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
+```
+
+Often we find the scripts we need to run in some other directory e.g. `/some/long/path/to/script.sh`. 
+This can be fixed by going to the directory before execution with `cd /some/long/path/to/ && ./script.sh`
+
+
+---
+layout: default
+---
+
+# Minimal Safe Bash Script Template Walkthrough
+
+* DISPLAY HELPFUL HELP and print nice messages - This is minimal documentation and also to display help for someone to know the options on how to use the script.
+
+```bash
+usage() {
+  cat << EOF # remove the space between << and EOF, this is due to web plugin issue
+Usage: $(basename "${BASH_SOURCE[0]}") [-h] [-v] [-f] -p param_value arg1 [arg2...]
+Script description here.
+...
+EOF
+  exit
+}
+```
+```bash {*}{maxHeight:'450px', maxWidth:'50px'}
+setup_colors() {
+  if [[ -t 2 ]] && [[ -z "${NO_COLOR-}" ]] && [[ "${TERM-}" != "dumb" ]]; then
+    NOFORMAT='\033[0m' RED='\033[0;31m' GREEN='\033[0;32m' ORANGE='\033[0;33m' BLUE='\033[0;34m' PURPLE='\033[0;35m' CYAN='\033[0;36m' YELLOW='\033[1;33m'
+  else
+    NOFORMAT='' RED='' GREEN='' ORANGE='' BLUE='' PURPLE='' CYAN='' YELLOW=''
+  fi
+}
+
+msg() {
+  echo >&2 -e "${1-}"
+}
+```
+
+
+---
+layout: default
+---
+
+# Environment scripts 
+
+One can string together various pieces of their analysis... 
+
+```bash
+export analysis_dir=$HOME/work/analysis
+alias mainscript="python3 main.py"
+lhcb-proxy-init
+source setupLCG.sh
+function run_analysis(){
+  python3 do_Fit.py
+  python3 calc_eff.py
+  python3 main_analysis.py
+  python3 plot_results.py
+}
+```
+
+---
+layout: two-cols
+---
+
+
+# Bash Profile and persistency settings
+
+The `~/.bash_profile` is used for defining user settings for a login shell.
+
+```bash
+# .bash_profile
+# Load .bashrc if it exists
+test -f ~/.bashrc && source ~/.bashrc
+
+# Alternatively 
+# Get Aliases and functions 
+if [-f ~/.bashrc]; then
+  . ~/.bashrc
+fi
+
+# User specific environment and startup programs 
+PATH=$PATH:$HOME/bin
+export PATH
+echo "$(date + [%F_%H:%M]) at $(hostname)" >> .lxnodes # useful for tmux session
+export PATH=$HOME/.cargo/bin:$PATH"
+
+# Enable text color and formatting
+export PS1="\[\033[36m\]\u:\[\033[33m\]\w\[\033[m\]\$ "
+export CLICOLOR=true
+export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
+```
+
+::right::
+
+The `~/.bashrc` file provides a place where you can set up variables, functions and aliases and helps reduce redundant effort. 
+
+```bash
+ # .bashrc
+
+# This is GOLD for finding out what is taking so much space on your drives!
+alias diskspace="du -S | sort -n -r |more"
+
+# This is where you put your hand rolled scripts (remember to chmod them)
+PATH="$HOME/bin:$PATH"
+
+alias ll ='ls -l -h'
+alias la='ls -a -l -h'
+
+function mcd (){
+  mkdir $1; cd $1
+}
+
+alias eosuser='cd /eos/user/c/ciperez'
+alias afsdir='cd /afs/cern.ch/work/c/ciperez
+```
+
+Ref: [stackexchange](https://serverfault.com/questions/3743/what-useful-things-can-one-add-to-ones-bashrc)
+
+
+---
+layout: default
+---
+
+# Miscellaneous 
+
+- ## TMUX, Screen
+Lets you split session into windows and also lets you log out and having the session running. 
+For big workloads, better to use HTCondor. Helps with monitoring CPU/memory usage too.
+
+See a [Quick and Easy Guide to TMUX](https://hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/) and [How to Use Linux Screen](https://linuxize.com/post/how-to-use-linux-screen/).
+
+- ## LCG Stacks and Apptainer 
+
+If you want an environment where everything works harmoniously, you might want to create a conda environment, or a python environment. 
+
+It is however better to rely on the already installed software to work with the platform you currently have. 
+
+```bash
+env | grep -i platform
+source /cvmfs/sft.cern.ch/lcg/views/setupViews.sh <LCG_number> <platform>
+```
+
+For ML related stuff, one can also get gpu-supported programs such as `tensorflow` with `LCG_106cuda for lxplus-gpu`.
+To check the latest LCG releases [click here](https://lcginfo.cern.ch/).
+
+---
+layout: fact
+---
+
+THE END!  
+This is just a simulation.
