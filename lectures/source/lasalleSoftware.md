@@ -3,6 +3,8 @@ marp: true
 paginate: true
 
 background: ./resources/global/background.jpg
+#background: ./resources/global/bkgmod.png
+#background: ./resources/global/backgroundmod.png
 # apply unocss classes to the current slide
 class: text-left
 
@@ -16,7 +18,7 @@ transition: fade
 
 # LaSalle Campus Group
 
-## **Dr. Uzziel Perez** on behalf of the La Salle Group
+## **Dr. Uzziel Perez** on behalf of 
 
 
 
@@ -27,6 +29,29 @@ PIs: Miriam Calvo Gomez, Xavier Vilasis Cardona
 
 ### LHCb Spain
 January 10, 2025
+
+<!-- <div style="position: fixed; bottom: 10px; right: 10px; z-index: 999;">
+  <img src="./resources/global/LHCb.png" height="30px">
+</div> -->
+
+<p align="right">
+  <div style="position: fixed; bottom: 60px; right: 60px; z-index: 999;">
+    <div style="display: inline-block;">
+      <img src="./resources/global/LHCb.png" height="30px" width="100px" />
+    </div>
+    <div style="display: inline-block;">
+      <img src="./resources/global/lasalle.png" height="30px" width="119px" />
+    </div>
+  </div>
+</p>
+<!-- <p align="right">
+  <div style="display: inline-block;">
+    <img src="./resources/global/LHCb.png" height="30px" width="100px" />
+  </div>
+  <div style="display: inline-block;">
+    <img src="./resources/global/lasalle.png" height="30px" width="119px " />
+  </div>
+</p> -->
 
 
 ---
@@ -40,6 +65,13 @@ backgroundSize: contain
 - Towards Unit Testing in Gaudi 
 - Flavour Tagging 
 - Reconstruction and Photon PID 
+<!-- 
+<p align="center">
+  <img src="./resources/global/LHCb.png" height="30px" width="200px"  />
+</p>
+<p align="center">
+  <img src="./resources/global/lasalle.png" height="30px" width="200px"  />
+</p> -->
 
 ---
 layout: fact
@@ -191,14 +223,16 @@ layout: full
 # **Tasks: Research Bets**
 
    - **O3**: Explore the following **moonshot** ideas: 
-      - Particle Transformer (ParT), proto-foundation Model, GraphNN 
-         - [Particle Transformer for Jet Tagging](https://arxiv.org/pdf/2202.03772), and [ABCNet: an attention-based method for particle tagging](https://link.springer.com/article/10.1140/epjp/s13360-020-00497-3)
-         <!-- - OMNIJET-$\alpha$: The first-cross-task foundation model for particle physics -->
-      
-         - ParT can also be viewed as a graph neural network on a fully-connected graph (each node = particle, each edge = particle interaction)
+      - Particle Transformer (ParT), and State-space models (Mamba) proto-foundation Models
+         - <span style="font-size: small;">[Particle Transformer for Jet Tagging](https://arxiv.org/pdf/2202.03772) and [ABCNet: Attention-Based Method for Particle Tagging](https://link.springer.com/article/10.1140/epjp/s13360-020-00497-3)</span>  
+
+        <!-- <span style="font-size: small;">OMNIJET-α: The first cross-task foundation model for particle physics</span> -->
+         - ParT can also be viewed as a graph neural network on a fully-connected graph 
+         - <span style="font-size: small;">(each node = particle, each edge = particle interaction)</span>
+         - [MAMBA](https://arxiv.org/pdf/2312.00752) is found to be more more efficient and has 5X higher throughput than Transformers
 <p align="center">
   <div style="background-color: black; padding: 10px; display: inline-block;">
-    <img src="./resources/lasalleSoftware/ParT.png" height="200px" width="420px" />
+    <img src="./resources/lasalleSoftware/FTinnovations.png" height="200px" width="410px" />
   </div>
 </p>
 
@@ -206,7 +240,7 @@ layout: full
 layout: fact
 ---
 
-## <span style="font-size: 49px;">**Simulation and Reconstruction**</span>
+## <span style="font-size: 49px;">**Simulation, Reconstruction, PID**</span>
 
 
 <!-- <p align="center">
@@ -215,12 +249,214 @@ layout: fact
 
 <p align="center">
   <div style="background-color: black; padding: 10px; display: inline-block;">
-    <img src="./resources/lasalleSoftware/FlavourTagging.png" height="200px" width="600px" />
+    <img src="./resources/lasalleSoftware/Reconstruction.png" height="200px" width="400px" />
   </div>
 </p>
 
 
 Contact Person: Uzziel Perez and Miriam Calvo Gomez 
+
+
+---
+layout: full
+---
+
+# **PID, Simulation and Reconstruction Scope**
+
+   - $\pi^{0/\pm}$ vs $\gamma$ PID (Internal Note being written up by Miriam)
+   - HybridMC for PicoCal and 3X3 Reconstruction integration into LHCb Simulation Framework
+   - Evolving Reconstruction Algorithms for *beyond Run 3* challenges 
+      - From Cellular Automaton $\rightarrow$ Graph Clustering $\rightarrow$  **End-to-End Reconstruction with GraphNN variants**
+
+<p align="center">
+  <div style="background-color: black; padding: 10px; display: inline-block;">
+    <img src="./resources/lasalleSoftware/PicoCalUpgrade.png" height="200px" width="600px" />
+  </div>
+</p>
+
+---
+layout: full
+---
+
+# Benefit of Longitudinal Segmentation PID
+
+   - Miriam performed a study to evaluate the benefit of having **longitudinal segmentation for neutral PID**
+   - Currently, Neutral PID for Run3 relies on cluster shape in the transverse plane. 
+      - **longitudinal segmentation** particularly for outer regions with higher cell size/lower granularity regions improves discrimination between **electromagnetic and hadronic showers**.
+<p align="center">
+  <div style="background-color: black; padding: 10px; display: inline-block;">
+    <img src="./resources/lasalleSoftware/LongitudinalSegmentation.png" height="200px" width="415px" />
+  </div>
+</p> 
+
+---
+layout: image-right
+image: ./resources/lasalleSoftware/FrontAndBackPivsGamma.png
+backgroundSize: contain
+---
+
+
+# **Spacal Simulation**
+   - Photons and Charged pions were generated using the standalone "Spacal Simulation" with `FullEcalSimulations/Run5_baseline_2023` and *PGun* option
+      - ~185k $\gamma$ and ~176k $\pi^{-}$
+      - Generated uniformly along the Calorimeter plane
+      - Energies: 0.2, 0.5, 1, 2, 3, 4, 10, 20, 35, 50, 100 GeV
+      - Incident Angle: $< 15^{\circ}$
+  - Energy distributions along the modules apparent between $\gamma$ and $\pi^{-}$
+
+
+
+
+
+---
+layout: full
+---
+
+# Classifier $\gamma$ vs $\pi^{-}$
+
+   - Two classifiers were trained using TMVA per calo region.
+      - Classifier A: With longitudinal segmentation - inputs: ($E_i/E_{TOT}$) of 18 cells (front and back) separately and the ratio deposited at the front ($E_{FRONT}/E_{TOT}$)
+      - Classifier B: Without longitudinal segmentatRion - inputs: ($E_i/E_{TOT}$) of the 9 cells where a cell corresponds to the sum of the front and back
+  
+<p align="center">
+  <div style="background-color: black; padding: 10px; display: inline-block;">
+    <img src="./resources/lasalleSoftware/MLPResponse.png" height="200px" width="700px" />
+  </div>
+</p> 
+
+
+---
+layout: full
+---
+
+# In favor of longitudinal segmentation
+
+   - Having longitudinal segmentation provides significant improvement on photon PID for all regions particularly for outermost cells (120 mm cell sizes). 
+   - The low scenario in the scoping document would degrade the PID capability of PicoCal.
+   - Note: This study doesn't include real U2 data-taking conditions i.e. does not include pile-up and timing information. Similar relative improvement is expected.
+  
+<p align="center">
+  <div style="background-color: black; padding: 10px; display: inline-block;">
+    <img src="./resources/lasalleSoftware/ROCAUC.png" height="200px" width="700px" />
+  </div>
+</p> 
+
+---
+layout: full
+---
+
+# **Evolving Reconstruction Algorithms**
+   - 3x3 Graph Clustering: Default reconstruction algorithm for Run 3 (65\% better than Cellular Automaton in terms of time performance)
+   - Graph Neural Networks appear to be natural successors. 
+   - Initial studies by Syracuse University group show better energy resolution (Pb modules)
+  
+<p align="center">
+  <div style="background-color: black; padding: 10px; display: inline-block;">
+    <img src="./resources/lasalleSoftware/GraphBasedNN.png" height="200px" width="700px" />
+  </div>
+</p> 
+
+---
+layout: full
+---
+
+# **Potential Upsides of GraphNN variants**
+Focus: GraphNNs with Attention (GATs) and GATs with Learnable Activations (Ka-GATs) (see "[Design Space for Graph Neural Networks](https://proceedings.neurips.cc/paper/2020/file/c5c3d4fe6b2cc463c7d7ecba17cc9de7-Paper.pdf)")
+
+- Attention mechanism targets relevant clusters and learns important features directly from raw data
+- KANs (Kolmogorov-Arnold Networks) learn complex nonlinear relationships between calorimeter hits, irregular detector geometry, pileup, timing, and particle properties (type, energy, momentum).
+
+<!-- 
+   - We focus on two prominent variants: GraphNNs with Attention Mechanism (GATs) and GATs with learnable activation functions (Ka-GATs).
+   - UPSIDES: 
+      - attention mechanism focuses more on relevant clusters and important features are automatically learned from raw data unlike in 3X3 clustering
+      - KANs (Kolmogorov-Arnold Networks) are capable of learning highly nonlinear relationships between calorimeter hits, pileup, timing information and particle properties (particle type, energy, momentum...)
+      - Scalable: By selectively focusing on the most relevant hits, GraphKANs can efficiently process large volumes of data in real-time (or near-real-time). Their architecture also allows for parallelization, enabling high-throughput processing, which is crucial for handling vast amounts of data in particle reconstruction tasks. -->
+
+
+<p align="center">
+  <div style="background-color: black; padding: 10px; display: inline-block;">
+    <img src="./resources/lasalleSoftware/ToyGAT.png" height="200px" width="350px" />
+  </div>
+</p> 
+
+---
+layout: full
+---
+
+# **Can we do an End-to-End reconstruction?**
+Focus: GraphNNs with Attention (GATs) and GATs with Learnable Activations (Ka-GATs).
+  - Can it handle high-throughput? Total data throughput 32 Tbits/s needs to be reconstructed in real-time. Would selective focus via multi-attention heads on relevant hits help?
+  - With KANs, would smaller model sizes lower inference and training times?  KANs are not known to be parallelizable.
+  - Can we take full advantage of the GPUs and perform a single reconstruction step by training on full-readout? (See E2E efforts in [CMS](https://indico.cern.ch/event/753914/contributions/3444463/attachments/1884973/3106831/E2E_Usai_Boost19.pdf)). This will entail creating a composite image/graph of multiple detectors. (See [S.Thais paper](https://arxiv.org/pdf/2203.12852))
+<!-- 
+   - We focus on two prominent variants: GraphNNs with Attention Mechanism (GATs) and GATs with learnable activation functions (Ka-GATs).
+   - UPSIDES: 
+      - attention mechanism focuses more on relevant clusters and important features are automatically learned from raw data unlike in 3X3 clustering
+      - KANs (Kolmogorov-Arnold Networks) are capable of learning highly nonlinear relationships between calorimeter hits, pileup, timing information and particle properties (particle type, energy, momentum...)
+      - Scalable: By selectively focusing on the most relevant hits, GraphKANs can efficiently process large volumes of data in real-time (or near-real-time). Their architecture also allows for parallelization, enabling high-throughput processing, which is crucial for handling vast amounts of data in particle reconstruction tasks. -->
+
+
+<p align="center">
+  <div style="background-color: black; padding: 10px; display: inline-block;">
+    <img src="./resources/lasalleSoftware/E2EReco.png" height="200px" width="550px" />
+  </div>
+</p> 
+
+
+
+---
+layout: image-right
+image: ./resources/lasalleSoftware/LaSalle.png
+backgroundSize: contain
+---
+
+# **Summary**
+
+LaSalle is involved in a multi-headed effort to improve LHCb software from efficient testing, improving flavour tagging algorithms, simulation and reconstruction as well as PIDs. Our research bets involve the following: 
+
+* Unit Testing in Gaudi 
+* Flavour Tagging with Physics-informed Loss Functions, Transformers, State-Space Models and Proto-foundation models
+* PIDs with segmentation and timing information
+* Applying Variants of Graph Neural Networks for Reconstruction 
+
+
+---
+layout: full
+---
+
+# **Summary**
+
+
+
+
+<p align="center">
+  <div style="background-color: black; padding: 10px; display: inline-block;">
+    <img src="./resources/lasalleSoftware/LaSalle.png" height="200px" width="550px" />
+  </div>
+</p> 
+
+
+
+
+
+
+---
+layout: fact
+---
+
+## <span style="font-size: 49px;">**BACKUP**</span>
+
+
+<!-- <p align="center">
+  <img src="./resources/lasalleSoftware/FlavourTagging.png" height="200px" width="600px"  />
+</p> -->
+
+<p align="center">
+  <div style="background-color: black; padding: 10px; display: inline-block;">
+    <img src="./resources/lasalleSoftware/LHCb.png" height="200px" width="600px" />
+  </div>
+</p>
 
 
 ---
