@@ -19,13 +19,10 @@ transition: fade
 # LaSalle Campus Group
 
 ## **Dr. Uzziel Perez** on behalf of 
-
-
-
  
-**Borja Sevilla SanJuan**, **Pol Muñoz Pastor** 
+**Borja Sevilla SanJuan**, **Pol Muñoz Pastor** (Adviser: Eduard Fernandez Alonso) 
 
-PIs: Miriam Calvo Gomez, Xavier Vilasis Cardona 
+PIs: Miriam Calvo Gomez, Xavier Vilasis Cardona
 
 ### LHCb Spain
 January 9, 2025
@@ -105,7 +102,7 @@ layout: full
   <img src="./resources/lasalleSoftware/AlgorithmsGraph.png" height="300px" width="300px" />
 </p>
 
-* Services are context-sensitive (e.g. Digitization Algorithm - Hits count)
+* Services are context-sensitive (e.g. Digitization vs Reconstruction Algorithm - diff. counters)
 
 <!-- <p align="center">
   <img src="./resources/lasalleSoftware/context-Sensitive.png" height="400px" width="400px" />
@@ -152,6 +149,9 @@ layout: full
 </p>
 
 * **O3: Study the Impact** of simplication on sustainability (ecological and technical, i.e. resource usage)
+
+
+
 <!-- 
 <p align="center">
   <img src="./resources/lasalleSoftware/isolated.png" height="300px" width="300px" />
@@ -159,6 +159,8 @@ layout: full
 <SlideCurrentNo class="text-orange-400" /> -->
 
 <SlideCurrentNo class="text-orange-400" />
+
+
 ---
 layout: fact
 ---
@@ -203,7 +205,7 @@ layout: full
 
 # **Tasks**
 
-   - **O1**: Preselection studies to optimize bandwidth  (event rate x event size) while maintaining or improving performance
+   - **O1**: Preselection studies (Classical) to optimize bandwidth (event rate x event size) while maintaining or improving performance
 
    - **O2**: Exploring Physics-informed Loss Functions (see [proof-of-concept](https://medium.com/@eric0reinhardt/gsoc-2023-with-ml4sci-reconstruction-and-classification-of-particle-collisions-with-masked-bab8b38958df)) 
       
@@ -225,19 +227,20 @@ layout: full
 
 ---
 layout: image-right
-image: ./resources/lasalleSoftware/FTinnovations.png
+image: ./resources/lasalleSoftware/FTinnov.png
 backgroundSize: contain
 ---
 
 # **Tasks: Research Bets**
-**O3**: Explore the following **moonshot** ideas: 
+**O3**: Explore the following **moonshot** ideas inspired by industry developments: 
   - Particle Transformer ([ParT](https://arxiv.org/pdf/2202.03772))
     - Fully-connected graph where each node $\rightarrow$ particle, edge $\rightarrow$ U
+    - Performs better than vanilla transformer
     
   - State Space Model ([MAMBA](https://arxiv.org/pdf/2312.00752))
     - is found to be more efficient and has 5X higher throughput than Transformers
 
-  - In both cases, we represent charged tracks, vertices, particles in each event as sets of "**point clouds**" (unordered set of variables)
+  -  "**Point clouds**" (unordered set of variables in high-dim space) represent charged tracks, vertices, particles in each event
 
 
 
@@ -320,7 +323,7 @@ backgroundSize: contain
    (which also includes Shashlike types)
   
    `FullEcalSimulations/Run5_baseline_2023` 
-  - ~185k $\gamma$ and ~176k $\pi^{-}$
+  - ~185k $\gamma$ and ~176k $\pi^{-}$ (uniformly along Calo Plane)
   - Uniformly along the Calorimeter plane
   - E: 0.2, 0.5, 1, 2, 3, 4, 10, 20, 35, 50, 100 GeV
   - Incident Angle: $< 15^{\circ}$
@@ -336,8 +339,8 @@ layout: full
 # Classifier $\gamma$ vs $\pi^{-}$
 
    - Two classifiers were trained using TMVA per calo region.
-      - Classifier A: With longitudinal segmentation - inputs: ($E_i/E_{TOT}$) of 18 cells (front and back) separately and the ratio deposited at the front ($E_{FRONT}/E_{TOT}$)
-      - Classifier B: Without longitudinal segmentatRion - inputs: ($E_i/E_{TOT}$) of the 9 cells where a cell corresponds to the sum of the front and back
+      - Classifier A: With longitudinal segmentation - inputs: ($E_i/E_{TOT}$) of 18 cells (front and back) separately + the ratio deposited at the front ($E_{FRONT}/E_{TOT}$)
+      - Classifier B: Without longitudinal segmentation - inputs: ($E_i/E_{TOT}$) of the 9 cells where a cell, i = F+B 
   
 <p align="center">
   <div style="background-color: black; padding: 10px; display: inline-block;">
