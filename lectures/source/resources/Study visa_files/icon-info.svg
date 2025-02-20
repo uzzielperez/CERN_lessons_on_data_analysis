@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="33px" height="33px" viewBox="0 0 33 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+    <title>Atencion info</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="13" cy="13" r="13"></circle>
+        <filter x="-26.9%" y="-19.2%" width="153.8%" height="153.8%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Atencion-info" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-5" transform="translate(4.000000, 2.000000)">
+            <g id="Oval">
+                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                <use fill="#1071B8" fill-rule="evenodd" xlink:href="#path-1"></use>
+            </g>
+            <path d="M14.1143663,14.7327836 L11.4168837,14.7327836 L11,7 L14.53125,7 L14.1143663,14.7327836 Z M11.0326968,17.59375 C11.0326968,17.0978467 11.1798307,16.7123012 11.474103,16.4371021 C11.7683753,16.161903 12.1961536,16.0243056 12.7574508,16.0243056 C13.3132985,16.0243056 13.7342651,16.161903 14.0203631,16.4371021 C14.3064612,16.7123012 14.4495081,17.0978467 14.4495081,17.59375 C14.4495081,18.0842038 14.3010118,18.4670246 14.0040148,18.7422237 C13.7070177,19.0174228 13.2915005,19.1550203 12.7574508,19.1550203 C12.2179516,19.1550203 11.7956227,19.0174228 11.4904514,18.7422237 C11.1852801,18.4670246 11.0326968,18.0842038 11.0326968,17.59375 Z" id="!" fill="#FFFFFF" fill-rule="nonzero" transform="translate(12.765625, 13.077510) rotate(-180.000000) translate(-12.765625, -13.077510) "></path>
+        </g>
+    </g>
+</svg>
