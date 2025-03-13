@@ -34,29 +34,37 @@ Alèxia Martorell I Granollers, Míriam Calvo Gómez (PI)
 layout: two-cols
 ---
 
-# Why do we care about **$\Lambda^{0}_{b} \rightarrow \Lambda \gamma$**?            
+# Why **$\Lambda^{0}_{b} \rightarrow \Lambda \gamma$**?            
 
 Decay is a  $b \rightarrow s \gamma$ transition (FCNC)
 - Forbiddent at tree-level in the SM
 - Sensitive to new particles in the loop
 - Precise measurement of $\mathcal{B}$ $\rightarrow$ constrain QCD models:
-    * Light Cone Sum Rules (LCSR)
-    * Quark Models (QM)
-    * Heavy Quark Symmetry (HQS)
+    * <span style="font-size: 12px;"> Light Cone Sum Rules (LCSR)</span>
+    * <span style="font-size: 12px;"> Quark Models (QM)</span>
+    * <span style="font-size: 12px;"> Heavy Quark Symmetry (HQS)</span>
+  
 
 
-
+**GOAL ⚽❗** $\rightarrow$ update $\mathcal{B}$:
+  * LHCb Run2 data: '16, '17, '18
+  * Normalization Mode: $B^{0} \rightarrow K^{*} \gamma$
 
 ::right::
 
-**GOAL ⚽❗** is to update the Branching Ratio with the rest of the *LHCb Run 2 data ('17-'18)*. 
+
 <p align="center">
   <img src="./resources/lb2lgamma/btos.png" height="400px" width="1200px" />
 </p>
 
 
-In contact with previous analyzers and working with Run 3 folks working on the same $\Lambda^{0}_{b} \rightarrow \Lambda \gamma$ radiative decay.
+In contact with previous analyzers and working with Run 3 folks (Arantza, Volodymyr, Jiahui)  on the same $\Lambda^{0}_{b} \rightarrow \Lambda \gamma$ radiative decay.
 
+* **Search for $\Lambda^{0}_{b} \rightarrow \Lambda \gamma$ at LHCb**:  
+  <span style="font-size: 12px;"> LHCb-ANA-2018-033, PhysRevLett.123.031801 (C. Marin, A. Puig)</span>
+* **Measurement of the photon polarization in $\Lambda^{0}_{b} \rightarrow \Lambda \gamma$ decays**: 
+<span style="font-size: 12px;"> LHCb-ANA-020-066, PhysRevD.105.L051104 (LuisMi Garcia Martin, P.G. Gironell, B.K. Jashal, C. Marin, A. Oyanguren)
+</span> 
 
 
 <SlideCurrentNo class="text-orange-400" />
@@ -102,7 +110,7 @@ Stripping and DaVinci versions used to build the candidates are listed in the ta
 <!-- The simulation samples with the event type, year, simulation version, number of simulated events and the DaVinci version to build the samples are listed in the table above.  -->
 
 **Control Modes:** 
-* $\Lambda^{0}_{b} \rightarrow \Lambda J\Psi, \rightarrow pK^{-} J\Psi, \rightarrow \Lambda \eta$
+* $\Lambda^{0}_{b} \rightarrow \Lambda J/\Psi, \rightarrow pK^{-} J/\Psi, \rightarrow \Lambda \eta$
 <!-- * $\Lambda^{0}_{b} \rightarrow pK^{-} J\Psi$
 * $\Lambda^{0}_{b} \rightarrow \Lambda \eta$ -->
 
@@ -124,7 +132,7 @@ Many thanks to the previous analyzers **$\Lambda^{0}_{b} \rightarrow \Lambda \ga
 flowchart TD
     subgraph "Phase I: 10/2024-01/2025"
     A["Trigger ✅ '16, '17, '18"] --> B["Preselection ✅ '16, '17, '18"]
-    B --> C["SPlot (MC Corrections) ✅ '16, '17, '18"]
+    B --> C["MC Corrections Lb2pkJpsi ✅ '16, '17, '18"]
     end
     
     style A fill:#d4f7d4,stroke:#82d282
@@ -153,7 +161,7 @@ layout: two-cols
 ---
 
 #  **Current status**
-* Analysis note started within the group with progress up to MC corrections
+* Analysis note started within the group with progress up to MC corrections with control mode $\Lambda^{0}_{b} \rightarrow pK^{-} J/\Psi$
 
 <!-- <p align="center">
   <img src="./resources/lb2lgamma/ANUPDATEF.PNG" height="300px" width="100px" />
@@ -179,7 +187,7 @@ layout: two-cols
 ---
 
 #  **First Attempt at S vs B: Classifier with XGBoost**
-*Work-in-progress...* 🔄
+*Work-in-progress...* 🔄 MC Corrections to be applied to SIG
 * **BKG**: Data High-mass sideband ($m > 6100$ MeV)
 * **SIG**: $\Lambda^{0}_{b} \rightarrow \Lambda \gamma$ (2016) with ($\Lambda^{0}_{b} p, \Lambda^{0}_{b} p_T$) 2D corrections from $\Lambda^{0}_{b} \rightarrow p K^{-} J/\Psi$ control mode 
 
@@ -189,6 +197,7 @@ layout: two-cols
 </p>
 
 ::right::
+🔄 First test of BDT S vs B classifier (w/o MC corrections) $\rightarrow$ most discriminative features
 <p align="center">
   <img src="./resources/lb2lgamma/SvsB.png" height="300px" width="250px" />
 </p>
@@ -205,7 +214,7 @@ layout: two-cols
 * Next: ($\Lambda^{0}_{b} p, \Lambda^{0}_{b} p_T$) 2D corr from $\Lambda^{0}_{b} \rightarrow p K^{-} J/\Psi$ control mode to $\Lambda^{0}_{b} \rightarrow \Lambda \gamma$ . 
     - *MC is used as proxy for signal*. 
 
-* $1^{0}$: How much precision will improve by increased statistics alone before applying other technical modifications?
+* $1^{st}$: How much precision will improve by increased statistics alone before applying other technical modifications?
 
 * Optimistic timeline $\rightarrow$ a preliminary measurement by end of year. 
 ::right::
